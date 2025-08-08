@@ -1,5 +1,7 @@
 # SQL-Data-WareHouse-Project
-SQL-Data-WareHouse-Project
+
+#SQL-Data-WareHouse-Project
+
 📊 Data Platform Case Study Project
 A hands-on project demonstrating modern data engineering concepts such as ETL, Data Warehousing, Lakehouse Architecture, Data Modeling, and Data Integration using SQL Server 2022, with documentation and automation using Git.
 
@@ -18,7 +20,8 @@ Building ETL pipelines (Extract, Transform, Load)
 
 Generating integrated reports from raw & big data
 
-🏗️ Features Implemented
+🏗️ Features Implemented:
+
 ETL workflow using SQL Server
 
 Customer database with 35+ demo records
