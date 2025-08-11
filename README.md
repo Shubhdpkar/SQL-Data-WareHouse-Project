@@ -1,43 +1,173 @@
-# SQL-Data-WareHouse-Project
+## SQL-Data-Warehouse-Project
 
-#SQL-Data-WareHouse-Project
+## 📊 Enterprise Data Engineering Case Study
+A hands-on project showcasing modern data engineering practices using SQL Server 2022 for ETL, Data Warehousing, and analytical modeling. The project simulates a real-world corporate data platform environment, complete with automation scripts, Git versioning, and documentation.
 
-📊 **Data Platform Case Study Project**
-A hands-on project demonstrating modern data engineering concepts such as ETL, Data Warehousing, Lakehouse Architecture, Data Modeling, and Data Integration using SQL Server 2022, with documentation and automation using Git.
+## 🔍 Project Overview
+This project is designed as an end-to-end data platform implementation covering:
 
-🔍 **Project Overview**
-This project simulates a real-world enterprise data environment. It covers:
+Data ingestion from multiple operational systems (CRM, ERP).
 
-Collecting and cleansing customer data
+Cleansing & standardization of raw data in a structured Medallion Architecture (Bronze → Silver → Gold).
 
-Performing transformations using SQL
+Data transformation using SQL scripts and stored procedures.
 
-Designing data architecture (Warehouse, Lakehouse, Mesh)
+Dimensional modeling to create a star schema for analytics.
 
-Creating star schemas and dimensional models
+Automated ETL process with execution time tracking and error handling.
 
-Building ETL pipelines (Extract, Transform, Load)
+GitHub integration for version control, with clearly separated folders for DDL, DML, and ETL logic.
 
-Generating integrated reports from raw & big data
+## 🏗️ Architecture & Layers
+Medallion Architecture
+Bronze Layer – Raw data staging area
 
-🏗️**Features Implemented:**
+Bulk load from CSV files (CRM & ERP datasets) using BULK INSERT.
 
-ETL workflow using SQL Server
+No transformation, just initial structure alignment.
 
-Customer database with 35+ demo records
+Folder: /scripts/bronze
 
-Gender & Purchase info enrichment
+Silver Layer – Cleansed & standardized data
 
-SQL data validation steps
+Duplicate removal, date formatting, data enrichment, and standardization (country names, gender, category mapping).
 
-Git versioning with step-wise commits
+Implemented with a single stored procedure silver.load_silver including:
 
-**Architecture diagrams:**
+Table truncation
 
-ETL stages
+Transformation queries
 
-Data Warehouse vs Data Lake
+Execution time logging per table and total batch
 
-Lakehouse & Mesh
+TRY…CATCH error handling with detailed messages
 
-Kimball vs Inmon vs Vault vs Medallion
+Folder: /scripts/silver
+
+Gold Layer – Analytics-ready dimensional model
+
+Creation of dimension and fact tables:
+
+gold.dim_customers
+
+gold.dim_products
+
+gold.fact_sales
+
+Joins CRM & ERP data into a star schema for BI tools.
+
+Folder: /scripts/gold
+
+## 📂 Source Systems & Data
+
+##CRM System
+
+cust_info.csv – Customer master data
+
+prd_info.csv – Product master data
+
+sales_details.csv – Sales transactions
+
+ERP System
+
+cust_az12.csv – Customer demographic data (birthdate, gender)
+
+loc_a101.csv – Customer location mapping
+
+px_cat_g1v2.csv – Product category hierarchy
+
+🛠️ Features Implemented
+Data Loading Automation
+
+Bulk insert from CSV to Bronze tables.
+
+Silver layer procedure cleans and loads data to analytics-ready format.
+
+Data Quality Rules Applied
+
+Date validation (0 or invalid formats set to NULL).
+
+Country code mapping (DE → Germany, US/USA → United States).
+
+Gender normalization (M/F → Male/Female).
+
+Sales calculation fixes (sales = quantity × price if missing/wrong).
+
+Removal of duplicates using ROW_NUMBER().
+
+Performance Tracking
+
+Each table load time is printed.
+
+Total batch duration is logged.
+
+Error Handling
+
+TRY…CATCH blocks in ETL procedures.
+
+Prints detailed error number, state, and message.
+
+Dimensional Modeling
+
+Customer Dimension with demographic enrichment.
+
+Product Dimension with category/subcategory mapping.
+
+Sales Fact with keys from dimensions for BI reporting.
+
+## 📊 Schema Design
+Star Schema in Gold Layer
+
+           dim_customers
+                |
+                |
+fact_sales  ---- product_key ---- dim_products
+
+dim_customers → Merged from CRM + ERP customer tables.
+
+dim_products → Product details joined with ERP product category.
+
+fact_sales → Sales transactions linked to products and customers.
+
+## 🚀 How to Run the Project
+Clone the repository
+
+bash
+Copy
+Edit
+git clone https://github.com/<your-username>/SQL-Data-Warehouse-Project.git
+Run DDL scripts (in order)
+
+/scripts/bronze/ddl.bronze.sql
+
+/scripts/silver/ddl.silver.sql
+
+/scripts/gold/ddl.gold.sql
+
+Load data
+
+Run bronze.load_bronze stored procedure.
+
+Run silver.load_silver stored procedure.
+
+Create gold views
+
+Execute /scripts/gold/views.sql to build dim_customers, dim_products, and fact_sales.
+
+Query the gold layer for BI or analytics.
+
+## 📈 Reporting Ready
+The Gold Layer views can be directly connected to Power BI, Tableau, or Excel Pivot Tables for interactive reporting and dashboards.
+
+## 📌 Key Learnings from this Project
+Building a data warehouse from scratch using SQL Server.
+
+Applying Medallion Architecture in SQL-based environments.
+
+Writing clean, modular SQL scripts for better maintainability.
+
+Implementing data quality rules at the ETL stage.
+
+Using Git to version control SQL scripts.
+
+Creating dimensional models for analytics.
