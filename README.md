@@ -58,6 +58,17 @@ Joins CRM & ERP data into a star schema for BI tools.
 
 Folder: /scripts/gold
 
+## Data FLow Schema Design Data Model
+
+![Architecture_v001-Data_Architecture](https://github.com/user-attachments/assets/07fe0b2b-0b32-492f-9c21-a841f3705007)
+
+![Data_Model](https://github.com/user-attachments/assets/47d2b401-15bc-488f-891b-e4a0f7029558)
+
+![DataFlow](https://github.com/user-attachments/assets/6d3f8a0d-a579-41f4-8a29-b1b702de4b59)
+
+
+
+
 ## 📂 Source Systems & Data
 
 ##CRM System
